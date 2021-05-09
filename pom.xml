@@ -26,12 +26,35 @@
       <artifactId>javafx-fxml</artifactId>
       <version>${javafx.version}</version>
     </dependency>
-<dependency>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>3.2.0</version>
-</dependency>
-
+    <dependency>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.2.0</version>
+    </dependency>
+    <dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<version>5.7.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.9.0</version>
+			<scope>test</scope>
+		</dependency>
+    <dependency>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>0.8.6</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-junit</artifactId>
+      <version>6.10.0</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
@@ -43,50 +66,54 @@
           <mainClass>graphics.Main</mainClass>
         </configuration>
       </plugin>
-  <plugin>
-    <artifactId>maven-resources-plugin</artifactId>
-    <version>3.0.2</version>
-    <executions>
-      <execution>
-        <id>copy-images</id>
-        <phase>validate</phase>
-        <goals>
-          <goal>copy-resources</goal>
-        </goals>
-        <configuration>
-          <outputDirectory>${basedir}/target/classes</outputDirectory>
-          <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                  <include>**/*.png</include>
-                </includes>
-            </resource>
-          </resources>
-        </configuration>
-      </execution>
-      <execution>
-        <id>copy-fxml</id>
-        <phase>validate</phase>
-        <goals>
-          <goal>copy-resources</goal>
-        </goals>
-        <configuration>
-          <outputDirectory>${basedir}/target/classes/graphics</outputDirectory>
-          <resources>
-            <resource>
-                <directory>src/main/java/graphics</directory>
-                <filtering>true</filtering>
-                <includes>
-                  <include>**/*.fxml</include>
-                </includes>
-            </resource>
-          </resources>
-        </configuration>
-      </execution>
-    </executions>
-  </plugin>
-    </plugins>
+      <plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.2</version>
+			</plugin>
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+          <execution>
+            <id>copy-images</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes</outputDirectory>
+              <resources>
+                <resource>
+                    <directory>src/main/resources</directory>
+                    <filtering>true</filtering>
+                    <includes>
+                      <include>**/*.png</include>
+                    </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-fxml</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes/graphics</outputDirectory>
+              <resources>
+                <resource>
+                    <directory>src/main/java/graphics</directory>
+                    <filtering>true</filtering>
+                    <includes>
+                      <include>**/*.fxml</include>
+                    </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+   </plugins>
   </build>
 </project>
