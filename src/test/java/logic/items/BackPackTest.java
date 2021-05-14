@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BakcPackTest {
+public class BackPackTest {
     private BackPack backPack;
     private Items item;
     private PlayerActions playerActions;
@@ -21,19 +21,16 @@ public class BakcPackTest {
     public void GetEssentialItemNumberTest() {
         //Arange
         init(new EssentialItem(0, new WinChecker()), PlayerActions.assemblingEssentials);
-        int item1Number = 0;
         EssentialItem item2 = new EssentialItem(1, new WinChecker());
-        int item2Number = 0;
         EssentialItem item3 = new EssentialItem(2, new WinChecker());
-        int item3Number = 0;
 
         //Act
         backPack.addItem(item, playerActions);
-        item1Number = backPack.getEssentialItemNumber();
+        int item1Number = backPack.getEssentialItemNumber();
         backPack.addItem(item2, playerActions);
-        item2Number = backPack.getEssentialItemNumber();
+        int item2Number = backPack.getEssentialItemNumber();
         backPack.addItem(item3, playerActions);
-        item3Number = backPack.getEssentialItemNumber();
+        int item3Number = backPack.getEssentialItemNumber();
 
         //Assert
         assertEquals(1, item1Number);
@@ -44,19 +41,24 @@ public class BakcPackTest {
     @Test
     public void HasEssentialItemIDTest() {
         //Arange
-        init(null, PlayerActions.assemblingEssentials);
+        init(new EssentialItem(0, new WinChecker()), PlayerActions.assemblingEssentials);
+        EssentialItem item2 = new EssentialItem(1, new WinChecker());
+        EssentialItem item3 = new EssentialItem(2, new WinChecker());
 
         //Act
-        for (int i = 0; i < 3; i++) {
-            EssentialItem item = new EssentialItem(i, new WinChecker());
-            boolean backPackAdd = backPack.addItem(item, playerActions);
-            boolean hasEssetialItemID = backPack.hasEssentialItemID(i);
+        backPack.addItem(item, playerActions);
+        boolean hasEssetialItemID = backPack.hasEssentialItemID(0);
+        backPack.addItem(item2, playerActions);
+        boolean hasEssetialItemID2 = backPack.hasEssentialItemID(1);
+        backPack.addItem(item3, playerActions);
+        boolean hasEssetialItemID3 = backPack.hasEssentialItemID(2);
 
-            //Assert
-            assertTrue(backPackAdd);
-            assertTrue(hasEssetialItemID);
-        }
+        //Assert
+        assertTrue(hasEssetialItemID);
+        assertTrue(hasEssetialItemID2);
+        assertTrue(hasEssetialItemID3);
     }
+
 
     @Test
     public void AddEssentialItemTest() {
@@ -65,9 +67,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -77,15 +79,12 @@ public class BakcPackTest {
         //Arange
         init(new EssentialItem(0, new WinChecker()), PlayerActions.assemblingEssentials);
         EssentialItem item2 = new EssentialItem(1, new WinChecker());
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertTrue(backPackSecondAdd);
     }
 
@@ -93,30 +92,26 @@ public class BakcPackTest {
     public void RemoveEssentialItemTest() {
         //Arange
         init(new EssentialItem(0, new WinChecker()), PlayerActions.assemblingEssentials);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetEssentialItemTest() {
         //Arange
         init(new EssentialItem(0, new WinChecker()), PlayerActions.assemblingEssentials);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -126,16 +121,46 @@ public class BakcPackTest {
     void UseFoodTest() {
         //Arrange
         init(new Food(), PlayerActions.eating);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Food useFoodItem = backPack.useFood();
-        boolean hasItem = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
+        boolean hasItem = backPack.hasItem(playerActions);
         assertEquals(item, useFoodItem);
         assertFalse(hasItem);
+    }
+
+    @Test
+    void UseFoodTestEmpty() {
+        //Arrange
+        init(new Food(), PlayerActions.eating);
+
+        //Act
+        Food useFoodItem = backPack.useFood();
+
+        //Assert
+        boolean hasItem = backPack.hasItem(playerActions);
+        assertNull(useFoodItem);
+        assertFalse(hasItem);
+    }
+
+    @Test
+    void UseFoodTestFoodRemains() {
+        //Arrange
+        init(new Food(), PlayerActions.eating);
+        Food item2 = new Food();
+        backPack.addItem(item, playerActions);
+        backPack.addItem(item2, playerActions);
+
+        //Act
+        Food useFoodItem = backPack.useFood();
+
+        //Assert
+        boolean hasItem = backPack.hasItem(playerActions);
+        assertEquals(item2, useFoodItem);
+        assertTrue(hasItem);
     }
 
     @Test
@@ -145,9 +170,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -157,15 +182,12 @@ public class BakcPackTest {
         //Arrange
         init(new Food(), PlayerActions.eating);
         Food item2 = new Food();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertTrue(backPackSecondAdd);
     }
 
@@ -173,30 +195,26 @@ public class BakcPackTest {
     public void RemoveFoodTest() {
         //Arrange
         init(new Food(), PlayerActions.eating);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetFoodTest() {
         //Arrange
         init(new Food(), PlayerActions.eating);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -210,9 +228,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -222,15 +240,12 @@ public class BakcPackTest {
         //Arrange
         init(new Divingsuit(), PlayerActions.wearingSuit);
         Divingsuit item2 = new Divingsuit();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertFalse(backPackSecondAdd);
     }
 
@@ -238,30 +253,26 @@ public class BakcPackTest {
     public void RemoveDivingsuitTest() {
         //Arrange
         init(new Divingsuit(), PlayerActions.wearingSuit);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetDivingsuitTest() {
         //Arrange
         init(new Divingsuit(), PlayerActions.wearingSuit);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -274,9 +285,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -286,15 +297,12 @@ public class BakcPackTest {
         //Arrange
         init(new FragileShovel(), PlayerActions.fragileshoveling);
         FragileShovel item2 = new FragileShovel();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertFalse(backPackSecondAdd);
     }
 
@@ -302,30 +310,26 @@ public class BakcPackTest {
     public void RemoveFragileShovelTest() {
         //Arrange
         init(new FragileShovel(), PlayerActions.fragileshoveling);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetFragileShovelTest() {
         //Arrange
         init(new FragileShovel(), PlayerActions.fragileshoveling);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -338,9 +342,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -350,15 +354,12 @@ public class BakcPackTest {
         //Arrange
         init(new Rope(), PlayerActions.savingWithRope);
         Rope item2 = new Rope();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertFalse(backPackSecondAdd);
     }
 
@@ -366,30 +367,26 @@ public class BakcPackTest {
     public void RemoveRopeTest() {
         //Arrange
         init(new Rope(), PlayerActions.savingWithRope);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetRopeTest() {
         //Arrange
         init(new Rope(), PlayerActions.savingWithRope);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -402,9 +399,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -414,15 +411,12 @@ public class BakcPackTest {
         //Arrange
         init(new Shovel(), PlayerActions.shoveling);
         Shovel item2 = new Shovel();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertFalse(backPackSecondAdd);
     }
 
@@ -430,30 +424,26 @@ public class BakcPackTest {
     public void RemoveShovelTest() {
         //Arrange
         init(new Shovel(), PlayerActions.shoveling);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetShovelTest() {
         //Arrange
         init(new Shovel(), PlayerActions.shoveling);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
@@ -466,9 +456,9 @@ public class BakcPackTest {
 
         //Act
         boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
 
         //Assert
+        boolean backPackHasItem = backPack.hasItem(playerActions);
         assertTrue(backPackAdd);
         assertTrue(backPackHasItem);
     }
@@ -478,15 +468,12 @@ public class BakcPackTest {
         //Arrange
         init(new Tent(), PlayerActions.setUpTent);
         Tent item2 = new Tent();
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         boolean backPackSecondAdd = backPack.addItem(item2, playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
         assertFalse(backPackSecondAdd);
     }
 
@@ -494,30 +481,26 @@ public class BakcPackTest {
     public void RemoveTentTest() {
         //Arrange
         init(new Tent(), PlayerActions.setUpTent);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
-        boolean backPackHasItem = backPack.hasItem(playerActions);
         backPack.removeItem(playerActions);
-        boolean backPackHasItemAfterRemove = backPack.hasItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
-        assertTrue(backPackHasItem);
-        assertFalse(backPackHasItemAfterRemove);
+        Items itemAfterRemove = backPack.getItem(playerActions);
+        assertNull(itemAfterRemove);
     }
 
     @Test
     public void GetTentTest() {
         //Arrange
         init(new Tent(), PlayerActions.setUpTent);
+        backPack.addItem(item, playerActions);
 
         //Act
-        boolean backPackAdd = backPack.addItem(item, playerActions);
         Items getItem = backPack.getItem(playerActions);
 
         //Assert
-        assertTrue(backPackAdd);
         assertEquals(item, getItem);
     }
     //endregion
