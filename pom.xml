@@ -1,5 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.openjfx</groupId>
   <artifactId>icefield</artifactId>
@@ -27,21 +27,21 @@
       <version>${javafx.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-resources-plugin</artifactId>
-        <version>3.2.0</version>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>3.2.0</version>
     </dependency>
     <dependency>
-			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter</artifactId>
-			<version>5.7.1</version>
-			<scope>test</scope>
-		</dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.1</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>3.9.0</version>
-        <scope>test</scope>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.9.0</version>
+      <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.jacoco</groupId>
@@ -52,20 +52,42 @@
     <dependency>
       <groupId>io.cucumber</groupId>
       <artifactId>cucumber-junit</artifactId>
-      <version>6.10.0</version>
+      <version>6.8.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter-api</artifactId>
-        <version>5.7.1</version>
-        <scope>compile</scope>
+      <groupId>io.cucumber</groupId>
+      <artifactId>cucumber-java</artifactId>
+      <version>6.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.7.1</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.vintage</groupId>
+      <artifactId>junit-vintage-engine</artifactId>
+      <version>5.7.1</version>
+      <scope>test</scope>
     </dependency>
   </dependencies>
-
-
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>${javafx.maven.plugin.version}</version>
+        <configuration>
+          <mainClass>graphics.Main</mainClass>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+      </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
@@ -87,20 +109,8 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>${javafx.maven.plugin.version}</version>
-        <configuration>
-          <mainClass>graphics.Main</mainClass>
-        </configuration>
-      </plugin>
-      <plugin>
-		<artifactId>maven-surefire-plugin</artifactId>
-		<version>2.22.2</version>
-      </plugin>
-      <plugin>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>3.0.2</version>
+        <version>3.2.0</version>
         <executions>
           <execution>
             <id>copy-images</id>
@@ -112,11 +122,11 @@
               <outputDirectory>${basedir}/target/classes</outputDirectory>
               <resources>
                 <resource>
-                    <directory>src/main/resources</directory>
-                    <filtering>true</filtering>
-                    <includes>
-                      <include>**/*.png</include>
-                    </includes>
+                  <directory>src/main/resources</directory>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>**/*.png</include>
+                  </includes>
                 </resource>
               </resources>
             </configuration>
@@ -131,17 +141,17 @@
               <outputDirectory>${basedir}/target/classes/graphics</outputDirectory>
               <resources>
                 <resource>
-                    <directory>src/main/java/graphics</directory>
-                    <filtering>true</filtering>
-                    <includes>
-                      <include>**/*.fxml</include>
-                    </includes>
+                  <directory>src/main/java/graphics</directory>
+                  <filtering>true</filtering>
+                  <includes>
+                    <include>**/*.fxml</include>
+                  </includes>
                 </resource>
               </resources>
             </configuration>
           </execution>
         </executions>
       </plugin>
-   </plugins>
+    </plugins>
   </build>
 </project>
