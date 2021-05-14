@@ -15,6 +15,18 @@
     <maven.compiler.target>15</maven.compiler.target>
   </properties>
 
+  <!-- JAVAFX TEST -->
+  <repositories>
+    <repository>
+      <id>maven-central-repo</id>
+      <url>https://repo1.maven.org/maven2</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+  <!-- JAVAFX TEST -->
+
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -37,12 +49,12 @@
 			<version>5.7.1</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<version>3.9.0</version>
-			<scope>test</scope>
-		</dependency>
+    <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>3.9.0</version>
+        <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
@@ -55,15 +67,72 @@
       <version>6.10.0</version>
       <scope>test</scope>
     </dependency>
-      <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-api</artifactId>
-          <version>5.7.1</version>
-          <scope>compile</scope>
-      </dependency>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.7.1</version>
+        <scope>compile</scope>
+    </dependency>
+
+    <!-- JAVAFX TEST
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-core</artifactId>
+      <version>4.0.5-alpha</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-junit</artifactId>
+      <version>4.0.5-alpha</version>
+      <scope>test</scope>
+    </dependency>
+     JAVAFX TEST
+     JAVAFX TEST-->
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-core</artifactId>
+      <version>4.0.5-alpha</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.testfx</groupId>
+          <artifactId>testfx-internal-java15</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.testfx</groupId>
+      <artifactId>testfx-junit</artifactId>
+      <version>4.0.5-alpha</version>
+      <scope>test</scope>
+    </dependency>
+   <!-- JAVAFX TEST -->
   </dependencies>
+
+
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>0.8.7</version>
+        <executions>
+          <execution>
+            <id>default-prepare-agent</id>
+            <goals>
+              <goal>prepare-agent</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>default-report</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>report</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.openjfx</groupId>
         <artifactId>javafx-maven-plugin</artifactId>
@@ -73,9 +142,9 @@
         </configuration>
       </plugin>
       <plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.22.2</version>
-			</plugin>
+		<artifactId>maven-surefire-plugin</artifactId>
+		<version>2.22.2</version>
+      </plugin>
       <plugin>
         <artifactId>maven-resources-plugin</artifactId>
         <version>3.0.2</version>
