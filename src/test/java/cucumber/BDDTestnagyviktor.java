@@ -24,11 +24,30 @@ public class BDDTestnagyviktor {
     Explorer explorer;
 
     IceField iceField = mock(IceField.class);
-    StableIceCell sic = new StableIceCell(iceField, null, null);;
-    UnstableIceCell uic;
+    StableIceCell sic = new StableIceCell(iceField, null, null);
+    UnstableIceCell uic = new UnstableIceCell(1, iceField);
     WaterCell wc = new WaterCell(iceField);
+    StableIceCell mocksic = mock(StableIceCell.class);
 
     WinChecker winCh = new WinChecker();
+
+    @Given("Eskimo stands on icecell")
+    public void breakFragileShovelGiven() throws Throwable{
+        eskimo = new Eskimo(mocksic);
+        when(mocksic.loseSnow(true)).thenReturn(true);
+    }
+    @When("Eskimo with a fragileshovel")
+    public void breakFragileShovelWhen() throws Throwable{
+        eskimo.putItemtoBackPack(new FragileShovel(), PlayerActions.fragileshoveling);
+    }
+    @Then("Eskimo uses it 3 times then break it")
+    public void breakFragileShovelThen() throws Throwable{
+        eskimo.useItem(PlayerActions.fragileshoveling);
+        eskimo.useItem(PlayerActions.fragileshoveling);
+        eskimo.useItem(PlayerActions.fragileshoveling);
+        assertEquals(null, eskimo.getBackPack().getItem(PlayerActions.fragileshoveling));
+    }
+
 
     @Given("Eskimo with Rope in his backpack")
     public void saveWithRopeGiven() throws Throwable{
@@ -70,22 +89,12 @@ public class BDDTestnagyviktor {
     }
 
 
-    @Given("Eskimo with a fragileshovel")
-    public void breakFragileShovelGiven() throws Throwable{
-        eskimo = new Eskimo(sic);
-        eskimo.putItemtoBackPack(new FragileShovel(), PlayerActions.fragileshoveling);
-    }
-    @Then("Eskimo uses it 3 times then break it")
-    public void breakFragileShovelThen() throws Throwable{
-        for(int i = 0; i < 3; i++)
-            eskimo.useItem(PlayerActions.fragileshoveling);
-        assertEquals(null, eskimo.getBackPack().getItem(PlayerActions.fragileshoveling));
-    }
-
-
     @Given("An unstable cell")
     public void breakUnstableCellGiven() throws Throwable{
         uic = new UnstableIceCell(1, iceField);
+        sic = new StableIceCell(iceField, null, null);
+        uic.addNeighbour(Way.down, sic);
+        sic.addNeighbour(Way.up, uic);
     }
     @When("More player stands on it than the capacity")
     public void breakUnstableCellWhen() throws Throwable{
@@ -97,6 +106,6 @@ public class BDDTestnagyviktor {
     }
     @Then("Unstable cell will be a water cell")
     public void breakUnstableCellThen() throws Throwable{
-        assertEquals(0, uic.getPlayersFromCell().size());
+        assertEquals(2, sic.getNeighbour(Way.up).getPlayersFromCell().size());
     }
 }
