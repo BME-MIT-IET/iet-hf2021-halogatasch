@@ -445,4 +445,6 @@ public class IceField {
 	public int getActualPlayerNumber(){ return currentPlayer; }
 	public Character getActualPlayer(){ return characters.get(currentPlayer); }
 	public Character getPlayersFromField(int i){ return characters.get(i); }
+
+	public static void setMaxPlayer(int max){ maxPlayer = max; };
 }
