@@ -37,8 +37,6 @@ public class ItemsTest {
         backpack = mock(BackPack.class);
         iceField = mock(IceField.class);
         explorer = new Explorer(stableIceCell);
-
-        //explorer.putItemtoBackPack(this.item, pa);
     }
 
     @Test
@@ -71,7 +69,6 @@ public class ItemsTest {
         init(new Tent(), PlayerActions.setUpTent);
         item.equip(explorer);
 
-        //A static getMaxPlayert oldottam meg így
         ArrayList<Character> ch = new ArrayList<>();
         ch.add(explorer); ch.add(explorer); ch.add(explorer);
         StableIceCell sic = new StableIceCell(new IceField(ch), null, null);
@@ -91,7 +88,7 @@ public class ItemsTest {
         StableIceCell sic = new StableIceCell(iceField, null, null);
         explorer.setOwnCell(sic);
 
-        item.use(explorer); item.use(explorer); item.use(explorer); //6 ásásra muszáj eltűnnie a hónak, max 5 lehet
+        item.use(explorer); item.use(explorer); item.use(explorer);
 
         assertEquals(0, sic.getSnow());
     }
@@ -137,7 +134,6 @@ public class ItemsTest {
 
         item.use(explorer);
 
-        //NEM JÓ
         assertEquals(0, neighbourWater.getPlayersFromCell().size());
     }
 
