@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class StepsNagygellert {
+public class BDDTestnagygellert {
 
     IceField iceField = mock(IceField.class);
     IceCell stableIceCell = new StableIceCell(iceField, null, null);

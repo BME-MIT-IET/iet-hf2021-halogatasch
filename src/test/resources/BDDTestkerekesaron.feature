@@ -1,4 +1,4 @@
-Feature: BDD Tests - kerekesaron
+Feature: BDD Tests - Kerekes Áron
 
   Scenario: Eskimo builds igloo on tent
     Given Eskimo stands on icecell with tent

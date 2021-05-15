@@ -1,4 +1,4 @@
-Feature: BDDTests-nagygellert
+Feature: BDDTests - Nagy Gellért
 
   Scenario: Character in water with diving suit
     Given Character is in water

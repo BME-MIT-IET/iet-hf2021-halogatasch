@@ -12,7 +12,7 @@ import logic.items.Tent;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-public class StepsKerekesaron {
+public class BDDTestkerekesaron {
     Eskimo eskimo;
     IceField iceField = mock(IceField.class);
     StableIceCell stableIceCell = new StableIceCell(iceField, null, null);
