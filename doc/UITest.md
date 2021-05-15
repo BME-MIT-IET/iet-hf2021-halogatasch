@@ -8,7 +8,7 @@ Miután sikeresen sikerült beállítanom elkezdtem vizsgálni, hogy mit tudok p
 
 Pár példa a testekre: Menü gombjainak működése, cellákban megjelenő entitások működése (karakterek, sátor, iglu), az irányító gombok helyes működése stb... 
 
-Sajnos a Github Actions nem tudja lefuttatni. A lokális gépen is úgy fut le, hogy megjeleníti a felületet és végigkattintja amit megadtam neki, így feltételezem ezt a github nem tudja kezelni az Actionsben.
+A Github Actions csak windows környezet alatt tudja futtatni a UI teszteket, ubuntu alatt elakadt a Build with Maven résznél.
 
 [Pull Request link](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/16)
 
