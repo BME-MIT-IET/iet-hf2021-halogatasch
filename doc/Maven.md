@@ -15,3 +15,4 @@ A github actions beüzemelésénél a java with maven sablont használtuk, majd 
 Eredmény és tanulság:
 
 A maven segítségével sokkal egyszerűbbé és követhetőbbé vált a függőségek kezelése és nyilvántartása, ezzel megkönnyítve a projekten dolgozó fejlesztők életét.
+Érdekesség a github actions-höz kapcsolódóan, hogy az alapértelmezett ubuntu környezetben nem futottak le a testfx-szel gyártott teszteink, viszont ha windowsos környezetre váltottunk, akkor ezek is sikeresen lefutottak.
