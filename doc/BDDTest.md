@@ -9,6 +9,7 @@ A feladathoz tartozó pull requestek:
  - [BDD Tests added](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/17)
  - [Bdd test markovicsgergely](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/14)
  - [BDD tests created](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/13)
+ - [Bear and WinCheckerTest](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/19)
 
 A feladat célja az volt, hogy a játékban szereplő fő funkciók megfelelő működését teszteljük le. Megfelelően működnek-e a 
 tárygak, a különböző típusú mezők, a hóvihar és a medve.
