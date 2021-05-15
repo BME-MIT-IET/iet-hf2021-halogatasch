@@ -148,6 +148,7 @@ public class GameBoard implements ControlledScreen {
     /**
      * A játéktér kirajzolása.
      */
+    //@FXML
     private GridPane field;
     /**
      * Cellához tartozó megjelenítők csoportja.
@@ -644,6 +645,7 @@ public class GameBoard implements ControlledScreen {
     public void buildCell(int x, int y){
         if(iceField.getCell(x, y).getPlayersFromCell().size() > 0) {
             cellCharacter = new GridPane();
+            cellCharacter.setId("cellCharacter");
             cellCharacter.setAlignment(Pos.BOTTOM_LEFT);
             GridPane.setMargin(cellCharacter, new Insets(9, 9, 4, 9));
             int cellPlayer = 0;
@@ -668,11 +670,13 @@ public class GameBoard implements ControlledScreen {
         }
         if(iceField.getCell(x, y).getTentTurnsLeft() > 0 || iceField.getCell(x, y).itHasIgloo()){
             cellLid = new GridPane();
+            cellLid.setId("cellLid");
             cellLid.add(setLidImage(x, y), 0, 0);
             field.add(cellLid, x, y);
         }
         if(iceField.getCell(x, y).isCapacityKnown()) {
             cellCapacity = new GridPane();
+            cellCapacity.setId("cellCapacity");
             cellCapacity.add(setCapacityImage(x, y), 0, 0);
             field.add(cellCapacity, x, y);
         }
@@ -730,5 +734,12 @@ public class GameBoard implements ControlledScreen {
         buildBackPack();
         buildCharacters();
         buildField();
+
+        field.setId("field");
+
+        //cellCharacter.setId("cellCharacter");
+        /*cellCapacity.setId("cellCapacity");
+        cellLid.setId("cellLid");*/
+        cellBear.setId("cellBear");
     }
 }
