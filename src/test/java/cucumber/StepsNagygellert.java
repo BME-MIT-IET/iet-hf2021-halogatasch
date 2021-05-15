@@ -82,7 +82,7 @@ public class StepsNagygellert {
 
     @Then("The tent should be demolished")
     public void theTentShouldBeDemolished() {
-        //Ennek működnie kéne, de nem rombolódik le lol
+        //Ennek működnie kéne, de nem rombolódik le
         //assertEquals(0, stableIceCell.getTentTurnsLeft());
         assertEquals(true, stableIceCell.hasBear());
     }
