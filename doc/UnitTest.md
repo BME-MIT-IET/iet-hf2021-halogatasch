@@ -5,7 +5,7 @@
 A programunk logikájának tesztelésére rábíztunk mindenkire bizonyos osztályokat vagy osztálycsaládokat, amiken Unit Testeket végeztünk el.
 Elvégeztünk egységteszteket a programban például a karakterekre, a karakterek tárgyainak csoportjára vagy hátitáskájára. Ezenkívül a pályán található cellákra vagy a medvére is.
 
-A tesztek készítéséhez segítségül használtuk Mockito mock elemeit, amikkel a logikában a vizsgált osztályhoz köthető objektumokat is imitálhattuk anélkül, hogy a teszthez nem köthető elemeket be kéne konfigurálnunk. Emellett a lefedettség vizsgálásához beállítottunk jacocot is a projekthez, így láthatjuk mekkora a lefedettsége az eddigi tesztjeinknek, mi az ami fontos és még kihagytuk.
+A tesztek készítéséhez segítségül használtuk Mockito mock elemeit, amikkel a logikában a vizsgált osztályhoz köthető objektumokat is imitálhattuk anélkül, hogy a teszthez nem köthető elemeket be kéne konfigurálnunk. Jól jött a Mockito használatánál, hogy ellenőrizhettük az osztályunk milyen függvényeket hányszor hív meg milyen értékkel, a kommunikációja is megfelelő-e a többi osztállyal. Emellett a lefedettség vizsgálásához beállítottunk jacocot is a projekthez, így láthatjuk mekkora a lefedettsége az eddigi tesztjeinknek, mi az ami fontos és még kihagytuk.
 
 ![jacoco](unitimg.png)
 
