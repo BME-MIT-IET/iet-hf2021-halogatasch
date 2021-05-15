@@ -1,13 +1,12 @@
-# Integrációs és ellenőrzési technikák - Házi 2
+# Unit Test
 
-## Project leírása:
+## Feladat Leírása:
 
-Egy kooperatív játék, melynek célja, hogy közösen összegyűjtsék a táblán véletlenszerűen elhelyezett tárgyakat úgy, hogy közben elkerüljék a halált. 
-A játékosok életét veszélyeztetik hóviharok, jegesmedve és instabil jégtáblák.
-A tárgyak el vannak rejtve a játékosok elől a hó alá, ezeket közös erővel kell megtalálniuk és a végén összerakniuk a jelzőpisztolyt.
+A programunk logikájának tesztelésére rábíztunk mindenkire bizonyos osztályokat vagy osztálycsaládokat, amiken Unit Testeket végeztünk el.
+Elvégeztünk egységteszteket a programban például a karakterekre, a karakterek tárgyainak csoportjára vagy hátitáskájára. Ezenkívül a pályán található cellákra vagy a medvére is.
 
-A kód logikája Java nyelven, a grafika JavaFX-ben van írva.
+A tesztek készítéséhez segítségül használtuk Mockito mock elemeit, amikkel a logikában a vizsgált osztályhoz köthető objektumokat is imitálhattuk anélkül, hogy a teszthez nem köthető elemeket be kéne konfigurálnunk. Emellett a lefedettség vizsgálásához beállítottunk jacocot is a projekthez, így láthatjuk mekkora a lefedettsége az eddigi tesztjeinknek, mi az ami fontos és még kihagytuk.
 
-A 2020-as Szoftver project laboratórium nevű tárgyra készített alkalmazáson fogjuk elkészítnei a házit.
+![jacoco](unitimg.png)
 
-Az eredeti repository: [link](https://github.com/nagyviktor/Projlab)
+Az egységtesztek készítése közben mélyebben megismerkedhettünk a program logikájával, megérthettünk olyan logikai elemeket, amiket ma már máshogy csinálnánk. Kisebb-nagyobb hibákat is felfedeztünk, amik az eredeti kiadáskor nem kerültek fényre.
