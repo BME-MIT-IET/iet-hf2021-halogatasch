@@ -1,13 +1,21 @@
-# Integrációs és ellenőrzési technikák - Házi 2
+# BDD Test
 
-## Project leírása:
+## A Feladat leírása és megoldása:
 
-Egy kooperatív játék, melynek célja, hogy közösen összegyűjtsék a táblán véletlenszerűen elhelyezett tárgyakat úgy, hogy közben elkerüljék a halált. 
-A játékosok életét veszélyeztetik hóviharok, jegesmedve és instabil jégtáblák.
-A tárgyak el vannak rejtve a játékosok elől a hó alá, ezeket közös erővel kell megtalálniuk és a végén összerakniuk a jelzőpisztolyt.
+Az feladathoz tartozó issue: [BDD tesztek készítése](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/issues/1)
 
-A kód logikája Java nyelven, a grafika JavaFX-ben van írva.
+A feladathoz tartozó pull requestek:
+ - [Bdd test nagygellert](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/18)
+ - [BDD Tests added](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/17)
+ - [Bdd test markovicsgergely](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/14)
+ - [BDD tests created](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/13)
 
-A 2020-as Szoftver project laboratórium nevű tárgyra készített alkalmazáson fogjuk elkészítnei a házit.
+A feladat célja az volt, hogy a játékban szereplő fő funkciók megfelelő működését teszteljük le. Megfelelően működnek-e a 
+tárygak, a különböző típusú mezők, a hóvihar és a medve.
 
-Az eredeti repository: [link](https://github.com/nagyviktor/Projlab)
+---
+A tesztekhez Cucumber Plugin-t használtunk. A feladatokat igyekeztük úgy elosztani, hogy a hasonló szenáriókat egy ember kapja, így ki tudtuk használni, hogy például amikor három tesztnél is a hóesés volt az esemény, azt a függvényt elég volt egyszer megírni és többször felhasználni a feature fájlban.
+
+## Tanulságok:
+
+A tanulság talán az lehet, hogy habár elsőre kicsit bonyolultabbank tűnik a BDD teszt, mint a Unit teszt és talán munkával is jár, viszont hosszú távon átláthatóbb és ahogy egyre több teszt elkészül, egyre gyorsabban lehet a különböző komponensekből egy új tesztet összerakni.
