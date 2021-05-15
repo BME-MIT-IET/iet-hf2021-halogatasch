@@ -9,6 +9,7 @@ import logic.characters.Character;
 import logic.characters.Eskimo;
 import logic.characters.Explorer;
 import logic.icecells.StableIceCell;
+import logic.icecells.WaterCell;
 import logic.items.Food;
 import logic.items.PlayerActions;
 
@@ -25,16 +26,23 @@ public class BDDTestmarkovicsgergely {
     Eskimo mockEskimo = mock(Eskimo.class);
     Explorer mockExplorer = mock(Explorer.class);
     IceField iceField;
+    StableIceCell stable = new StableIceCell(iceField, null, null);
+    WaterCell water = new WaterCell(iceField);
 
     @Given("Eskimo Falls in Water without diving suit")
     public void gameOverinWaterGiven() throws Throwable {
-        ArrayList<Character> characters = new ArrayList<Character>(Arrays.asList(mockEskimo, mockExplorer,mockExplorer));
+        eskimo = new Eskimo(stable);
+        ArrayList<Character> characters = new ArrayList<Character>(Arrays.asList(eskimo, new Explorer(stable), new Explorer(stable)));
         iceField = new IceField(characters);
+        stable.addNeighbour(Way.up, water);
+        eskimo.setOwnCell(stable);
+        eskimo.setFacingWay(Way.up);
+        eskimo.move();
     }
     @When("Full turn passes")
     public void gameOverinWaterWhen() throws Throwable {
-        when(mockEskimo.getTurnsInWater()).thenReturn(3);
-        when(mockExplorer.getTurnsInWater()).thenReturn(0);
+        iceField.nextPlayer();
+        iceField.nextPlayer();
         iceField.nextPlayer();
     }
     @Then("Game over")
