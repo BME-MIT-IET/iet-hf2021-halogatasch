@@ -1,13 +1,15 @@
-# Integrációs és ellenőrzési technikák - Házi 2
+# UI Test
 
-## Project leírása:
+## Feladat leírása és megoldása:
 
-Egy kooperatív játék, melynek célja, hogy közösen összegyűjtsék a táblán véletlenszerűen elhelyezett tárgyakat úgy, hogy közben elkerüljék a halált. 
-A játékosok életét veszélyeztetik hóviharok, jegesmedve és instabil jégtáblák.
-A tárgyak el vannak rejtve a játékosok elől a hó alá, ezeket közös erővel kell megtalálniuk és a végén összerakniuk a jelzőpisztolyt.
+A JavaFX programunkat a TestFX-el teszteltük le. Ez egy külön a JavaFX számára készített tesztelő kód.  
 
-A kód logikája Java nyelven, a grafika JavaFX-ben van írva.
+Miután sikeresen sikerült beállítanom elkezdtem vizsgálni, hogy mit tudok pontosan leellenőrizni. A JavaFX-es elemek állapotára tudtam ellenőrzéseket írni. Például gombok láthatóságára, labelek szövegére. A tesztek többsége az adott gombok megnyomásától fog állapotot váltani.
 
-A 2020-as Szoftver project laboratórium nevű tárgyra készített alkalmazáson fogjuk elkészítnei a házit.
+Pár példa a testekre: Menü gombjainak működése, cellákban megjelenő entitások működése (karakterek, sátor, iglu), az irányító gombok helyes működése stb... 
 
-Az eredeti repository: [link](https://github.com/nagyviktor/Projlab)
+Sajnos a Github Actions nem tudja lefuttatni. A lokális gépen is úgy fut le, hogy megjeleníti a felületet és végigkattintja amit megadtam neki, így feltételezem ezt a github nem tudja kezelni az Actionsben.
+
+[Pull Request link](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/pull/16)
+
+[Issue link](https://github.com/BME-MIT-IET/iet-hf2021-halogatasch/issues/2)
