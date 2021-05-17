@@ -93,28 +93,6 @@ public class UITest extends ApplicationTest {
     }
 
     @Test
-    public void testExplorerAbilityUsed() throws Exception{
-        clickOn((Button)lookup("#explorer").query());
-        clickOn((Button)lookup("#explorer").query());
-        clickOn((Button)lookup("#explorer").query());
-        clickOn((Button)lookup("#start").query());
-
-        clickOn((Button)lookup("#ability").query());
-        clickOn((Button)lookup("#up").query());
-        clickOn((Button)lookup("#ability").query());
-        clickOn((Button)lookup("#down").query());
-        clickOn((Button)lookup("#ability").query());
-        clickOn((Button)lookup("#left").query());
-        clickOn((Button)lookup("#ability").query());
-        clickOn((Button)lookup("#right").query());
-
-        int x = GridPane.getRowIndex(lookup("#cellCapacity").query());
-        int y = GridPane.getColumnIndex(lookup("#cellCapacity").query());
-        assertNotEquals(-1, x);
-        assertNotEquals(-1, y);
-    }
-
-    @Test
     public void testMenuButtons() throws Exception{
         Button explorer = lookup("#explorer").query();
         Button eskimo = lookup("#eskimo").query();
